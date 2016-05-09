@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Drawing Tests</title>
+        
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+        <link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui.css" />
+        
+        <script src="scripts/jquery-1.10.2.js"></script>
+        <script src="scripts/jquery-ui.js"></script>
+        <script src="../fieldChooser.js"></script>
+        
+        <script>
+           /* $(document).ready(function () {
+				var optionTexts = [];
+              $('#sourceField p').each(function(){
+					var val = $(this).text();
+					optionTexts.push($(this).text());	
+			  });
+			 
+            });*/
+			$(document).ready(function () {
+				$("#sourceField > p").click(function(){
+					var textContent = this.textContent;
+					$("#destination").append("<p>" + textContent + "</p>");
+				});
+				
+				$('#view').click(function(){
+					var text = $("#destination").html();
+					$("#viewSelected").html(text);
+				})
+				
+			});
+			/*var div = document.getElementById('fieldChooser');
+			var p = div.getElementsByTagName('p');
+			div.addEventListener("click", function(evn){
+				console.info("done"+evn)
+			});*/
+			//textContent
+        </script>
+    </head>
+    <body >
+        <div id="fieldChooser" tabIndex="1">
+            <div id="sourceField">
+                <p>First name</p>
+                <p>Last name</p>
+                <p>Home</p>
+				<p>Home</p>
+                <p>Work</p>
+                <p>Direct</p>
+                <p>Cell</p>
+                <p>Fax</p>
+                <p>Work email</p>
+                <p>Personal email</p>
+                <p>Website</p>
+            </div>
+        </div>
+		
+		<div id="destination"> selected</div>	
+		
+		<div id="viewSelected">view Selected </div>
+		
+		<button id="view">View</button>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
