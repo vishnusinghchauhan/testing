@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radar</title>
+
+	<style type="text/css">
+	canvas{
+  outline:0;
+  border:1px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+}
+	</style>
+<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	
+</head>
+<body>
+<canvas id='radar' height="800" width="800" ></canvas>
+<div class="a-pulse"></div>
+<button id="teat" style="float:left"> draw </button>
+<button id="play" style="float:left"> darw2 </button>
+
+<script type="text/javascript" src="canvas.js"></script>
+
+<style>
+.a-pulse {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 28px;
+}
+.a-pulse:before {
+  display:block;
+  content:'';
+  margin: 0 auto;
+  border-radius: 100px;
+  position: absolute;
+  z-index:999;
+  right: -31px;
+  top: 1px;
+  background-color: transparent;
+  opacity: 0.1;
+  width: 64px;
+  height: 35px;
+  border: 2px solid red;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-animation: pulse 0s linear infinite;
+  -moz-animation: pulse 0s linear infinite;
+  border-image: initial;
+}
+.a-pulse:after {
+  position:absolute;
+  top:10px;
+  left:-3px;
+  width:0;
+  height:0;
+  display:block;
+  background:transparent;
+  content:'';
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-bottom:12px solid transparent;
+}
+ @-webkit-keyframes pulse {
+   0% {-webkit-transform: scale(0); opacity: 0;}
+   8% {-webkit-transform: scale(0); opacity: 0;}
+   15% {-webkit-transform: scale(0.1); opacity: 0.9;}
+   30% {-webkit-transform: scale(0.5); opacity: 0.9;}
+   100% {opacity: 0; -webkit-transform: scale(1);}
+ }
+ @-moz-keyframes pulse {
+   0% {-moz-transform: scale(0); opacity: 0;}
+   8% {-moz-transform: scale(0); opacity: 0;}
+   15% {-moz-transform: scale(0.1); opacity: 0.9;}
+   30% {-moz-transform: scale(0.5); opacity: 0.9;}
+   100% {opacity: 0; -moz-transform: scale(1);}
+ }
+</style>
+
+</body>
+</html>
