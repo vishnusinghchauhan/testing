@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radar</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.min.css">
+
+	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-toggle.min.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="left_radar">
+		<section id="canvas_radar">
+			<h3 class="title">Radar</h3>
+			<canvas id='radar' ></canvas>
+			<div class="a-pulse"></div>
+		</section>
+	</div>
+
+
+	<div class="right_radar rmpadd">
+		<section id="radar_control">
+			<form role="form">
+				<h3>Control Panel</h3>
+				<div class="op_btn">
+					<h5>OP Mode</h5>
+					<label id="op_mode"> ON <input type="checkbox" data-toggle="toggle"> OFF </label>
+					<button type="button" class="btn btn-primary" id="standBy">StandBy</button>
+					<button type="button" class="btn btn-primary" id="txn">TXN</button>
+				
+					<button type="button" class="btn btn-primary">AGC</button>
+					<button type="button" class="btn btn-primary">PFR WBL</button>
+					<button type="button" class="btn btn-primary">CIRC POLAR</button>
+					<button type="button" class="btn btn-primary">AGILITY</button>
+					<button type="button" class="btn btn-primary">Pulse Compression</button>
+					<button type="button" class="btn btn-primary">B Scope</button>
+					<button type="button" class="btn btn-primary">A Scope</button>
+					
+					<button type="button" class="btn btn-primary" id="track" >Track</button>
+					<button type="button" class="btn btn-primary" id="releaseTrack" >Release</button>
+					<button type="button" class="btn btn-primary" id="drawOn" >EBL On</button>
+					<button type="button" class="btn btn-primary" id="drawebl" >Draw EBL</button>
+					<button type="button" class="btn btn-primary" id="drawEblOne" >Draw EBL One</button>
+					<button type="button" class="btn btn-primary" id="drawEblTwo" >Draw EBL Two</button>
+					<button type="button" class="btn btn-primary" id="deleteBbl" >Delete EBL</button>
+					<button type="button" class="btn btn-primary" id="drawVrmOne" >Draw VRM One</button>
+					<button type="button" class="btn btn-primary" id="drawVrmtwo" >Draw VRM Two</button>
+					<button type="button" class="btn btn-primary" id="vrmOff" >VRM OFF</button>
+					<button type="button" class="btn btn-primary">ISAR On</button>
+				</div>
+
+				<div class="op_btn">
+					<div class="form-group">
+						<label for="range_scale">Radar List</label>
+						<select class="form-control"><option>Radar 1</option><option>Radar 2</option><option>Radar 3</option>
+						<option>Radar 4</option><option>Radar 5</option></select>
+					</div>
+					<div class="form-group">
+						<label for="range_scale">Range Scale</label>
+						<select class="form-control" id="rangeScal" onchange="noOfScale();">
+							<option value="1" >1</option>
+							<option value="2" >2</option>
+							<option value="3" >3</option>
+							<option value="4" >4</option>
+							<option value="5" selected>5</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="ARR">ARR</label>
+						<select class="form-control"><option>ARR 1</option><option>ARR 2</option><option>ARR 3</option>
+						<option>ARR 4</option><option>ARR 5</option></select>
+					</div>
+					<div class="range range-primary text-center">
+						<label>Gain(%)</label>
+						<input type="range" name="range" min="1" max="100" value="50" onchange="rangeWarning.value=value">
+						<output id="rangeWarning">50</output>
+					</div>
+					<div class="range range-primary text-center">
+						<label>Power Control(%)</label>
+						<input type="range" name="range" min="1" max="100" value="50" onchange="rangeDanger.value=value">
+						<output id="rangeDanger">50</output>
+					</div>
+
+					<hr>
+
+					<div class="form-group">
+						<label for="BAND">BAND</label>
+						<select class="form-control"><option>1</option><option>2</option><option>3</option><option>4</option>
+						<option>5</option></select>
+					</div>
+					<div class="form-group">
+						<label for="name">PulseWidth</label>
+						<input type="text" class="form-control" id="PulseWidth" placeholder="Enter PulseWidth">
+					</div>
+					<div class="form-group">
+						<label for="name">Frequency</label>
+						<input type="text" class="form-control" id="Frequency" placeholder="Enter Frequency">
+					</div>
+					<div class="form-group">
+						<label for="name">PRF</label>
+						<input type="text" class="form-control" id="PRF" placeholder="Enter PRF">
+					</div>
+
+					<hr>
+
+					<div class="form-group">
+						<label for="BAND">Assign Tgt ID</label>
+						<input type="text" class="form-control" id="PRF" placeholder="Assign Tgt ID">
+					</div>
+					<div class="form-group">
+						<label for="name">Display Tgt ID</label><br>
+						<label id="tgt"> ON <input type="checkbox" data-toggle="toggle"> OFF </label>
+					</div>
+				</div>
+
+				<div class="op_btn">
+					<h5>Bearing</h5>
+					<div class="range range-primary text-center">
+						<label>Start Bearing</label>
+						<input type="range" name="range" min="1" max="100" value="50" onchange="rangeWarning.value=value">
+						<output id="rangeWarning">50</output>
+					</div>
+					<div class="range range-primary text-center">
+						<label>End Bearing</label>
+						<input type="range" name="range" min="1" max="100" value="50" onchange="rangeDanger.value=value">
+						<output id="rangeDanger">50</output>
+					</div>
+					<div class="form-group">
+						<label for="name">GRD</label><br>
+						<label id="grd"> ON <input type="checkbox" data-toggle="toggle"> OFF </label>
+					</div>
+					<div class="form-group">
+						<label for="name">RINGS</label><br>
+						<label id="rings"> ON <input type="checkbox" data-toggle="toggle"> OFF </label>
+					</div>
+
+					<hr>
+
+					<button type="button" class="btn btn-primary">True Mode</button>
+					<button type="button" class="btn btn-primary">Relative Mode</button>
+					<button type="button" class="btn btn-primary">PPI Center</button>
+					<button type="button" class="btn btn-primary">Off Center PPI</button>
+					<button type="button" class="btn btn-primary">Guard Ring</button>
+					<button type="button" class="btn btn-primary">Stop Alarm</button>
+					
+					<hr>
+
+					<h5>Scan Selection</h5>
+					<button type="button" class="btn btn-primary">AUTO</button>
+					<button type="button" class="btn btn-primary">TRIG</button>
+					<button type="button" class="btn btn-primary">MANUAL</button>
+					<button type="button" class="btn btn-primary">Zoom In</button>
+					<button type="button" class="btn btn-primary">Zoom Out</button>
+	
+				</div>
+				<div class="op_btn">
+					<div class="info">
+						<h5>Cursor Position</h5>
+						<span> <b> X-Cordinate </b> </span>  <p class="xcordinate"> 0.00 </p>  
+						<span> <b> Y-Cordinate </b> </span> <p class="ycordinate"> 0.00 </p>
+						<span> <b> Distance </b> </span> <p class="distance"> 0.00 </p>
+						<span> <b> Cource </b> </span> <p class="Courrce"> 0.00 </p>
+					</div>
+				</div>
+			</form>
+		</section>
+		<div class="clearfix"></div>
+	
+	</div>
+
+</div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
+
+
+
