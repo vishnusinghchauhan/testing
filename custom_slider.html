@@ -1,0 +1,35 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<style>
+
+</style>
+
+<div class="slideshow">
+<img height="200" name="slide" src="images\1.jpg" width="400" />
+</div>
+
+</body>
+<script language="JavaScript"> 
+var i = 0; 
+var path = new Array(); 
+
+// LIST OF IMAGES 
+path[0] = "images/b.png"; 
+path[1] = "images/a.png"; 
+path[2] = "images/b.png"; 
+
+function swapImage() 
+{ 
+document.slide.src = path[i]; 
+if(i < path.length - 1) i++; 
+else i = 0; 
+setTimeout("swapImage()",3000); 
+} 
+window.onload=swapImage; 
+</script> 
+
+</html>
