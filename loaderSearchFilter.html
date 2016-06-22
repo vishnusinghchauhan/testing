@@ -1,0 +1,133 @@
+<html ng-app="demoApp">
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!--************CSS Link Close************-->	
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>				
+<script   src="https://code.jquery.com/ui/1.7.3/jquery-ui.js"   integrity="sha256-XZCm8BazCZfGS3f0TxPmgPikI847FfjQv07QBAhiiWA="   crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var rowCount = 1;
+	$('.addWeapon').click(function(){
+		var recRow = '<div  class="addWeapon" id="addWeapon'+rowCount+'">'+  
+						'<div class="col-md-3"><div class="form-group"><label for="sel1"> Weapon list:</label><select class="form-control weaponName'+rowCount+'" id="sel1" onchange="function('+rowCount+');"> <option>1</option> <option></option>  </select></div></div>' +
+						'<div class="col-md-3"><div class="form-group"><label for="sel1"> Weapon Type:</label><select class="form-control weaponName'+rowCount+'" id="sel1"> <option>1</option> <option></option>  </select></div></div>' +
+						'<div class="col-md-3"><div class="form-group"><label for="sel1"> Email:</label><input type="email" class="form-control email'+rowCount+'" id="email"></div></div>' +
+						'<div class="col-md-3"><div class="form-group"><label for="sel1"> Email:</label><input type="email" class="form-control address'+rowCount+'" id="email"></div></div>' +						
+						'</div>'; 	
+		jQuery('#addedWeapon').append(recRow);
+		rowCount++;
+	})	
+	$(window).load(function() {
+		$(".loader").fadeOut(1000);
+	})
+	
+	$('.filter li').click(function(){
+		var category = $(this).html();
+		$('.portfolio li').fadeOut();
+		
+		$('.portfolio li').each(function(){
+			var test = $(this).html();
+			if($(this).hasClass(category)){
+				$(this).fadeIn();
+			}
+		})
+	})
+	
+	$('#search').keypress(function(){
+		var find = $('#search').val();
+		
+		$('.portfolio li').hide();
+		
+		$('.portfolio li').each(function(){
+			var currentWord = $(this).attr('data-keyword');
+			if(currentWord.indexOf(find) >= 0){
+				$(this).show();
+			}
+		})
+	})
+	
+	$('.portfolio').sortable();
+})
+
+</script>
+</head>  
+<body>
+<div class="loader"></div>
+
+<div class="container">
+	<ul class="list-inline filter">
+	  <li>item1</li>
+	  <li>item2</li>
+	  <li>item3</li>
+	</ul>
+	<input type="text" id="search" >
+	<ul class="list-inline portfolio">
+		<li class="item1" data-keyword="one" ><img src="images/1.jpg" /></li>
+		<li class="item2" data-keyword="two"><img src="images/1.jpg" /></li>
+	    <li class="item1" data-keyword="three"><img src="images/1.jpg" /></li>
+		<li class="item2" data-keyword="four"><img src="images/1.jpg" /></li>
+		<li class="item1" data-keyword="five"><img src="images/1.jpg" /></li>
+		<li class="item3" data-keyword="six"><img src="images/1.jpg" /></li>
+	    <li class="item3" data-keyword="seven"><img src="images/1.jpg" /></li>
+		<li class="item3" data-keyword="eight"><img src="images/1.jpg" /></li>
+	</ul>
+
+	<div class="row">
+		<div class="addWeapon">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="sel1"> Weapon list:</label>
+					<select class="form-control weaponName" id="sel1">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label for="sel1"> Weapon type:</label>
+					<select class="form-control weaponType" id="sel1">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+					<label for="email">Email address:</label>
+					<input type="email" class="form-control email" id="email">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="email">Email address:</label>
+					<input type="email" class="form-control address" id="email">
+				</div>
+			</div>		
+		</div>
+		<div id="addedWeapon"> </div>
+		
+		<div class="col-lg-2">
+		<button type="button" class="btn btn-default addWeapon">Add Weapon</button>
+		</div>
+	</div>
+</div>
+ <style>
+ .container {padding: 20px 0px;}
+ .addWeapon {width:100%; display:block;border-bottom: 3px solid #ccc ;overflow:hidden; margin: 20px 0px;}
+ .loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/1.jpg') 50% 50% no-repeat rgb(249,249,249);
+}
+.filter li{margin-bottom: 10px;}
+ </style>
+</body>
+</html>
